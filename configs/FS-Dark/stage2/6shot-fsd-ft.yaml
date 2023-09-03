@@ -1,0 +1,55 @@
+name: "mdn-fsd-mixhq-6shot-ft"
+
+dataset:
+  name: "FSD"
+  path: "data/fs_dark"
+  num_workers: 4
+  pin_memory: False
+  preload: True
+  transform: 
+    name: "dimma_finetune"
+    image_size: 400
+    flip_prob: 0.5
+  batch_size: 4
+  limit: null 
+  start_idx: 0
+
+model:
+  channels: 
+    - 64 
+    - 128
+    - 256
+    - 384
+  layers_per_block: 2
+  downblock: "ResnetDownsampleBlock2D"
+  upblock: "ResnetUpsampleBlock2D"
+  add_attention: True
+  attention_head_dim: 64
+  save_images: 8
+  ssim_loss: True
+  ssim_loss_weight: 0.05
+  head: "sig_dim"
+  checkpoint: "checkpoints/mdn-fsd-mixhq-6shot/mdn-fsd-mixhq-6shot.ckpt"
+
+optimizer:
+  name: "adam"
+  lr: 1e-7
+  weight_decay: 0
+  betas: 
+    - 0.9
+    - 0.99
+  scheduler:
+    name: "cosine"
+    frequency: 1
+
+loss:
+  name: "mse"
+
+logger:
+  checkpoint_dir: "checkpoints"
+  save_top_k: 1
+
+device: "gpu"
+iter: 2000
+eval_freq: 40
+seed: 42

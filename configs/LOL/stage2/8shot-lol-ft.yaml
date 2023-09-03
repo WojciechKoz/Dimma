@@ -1,0 +1,55 @@
+name: "mdn-mixhq-8shot-ft"
+
+dataset:
+  name: "LOL"
+  path: "data/LOL"
+  num_workers: 8
+  pin_memory: False
+  preload: True
+  transform: 
+    name: "dimma_finetune"
+    image_size: 256
+    flip_prob: 0.5
+  batch_size: 4
+  limit: 8
+  start_idx: 0
+
+model:
+  channels: 
+    - 64 
+    - 128
+    - 256
+    - 384
+  layers_per_block: 2
+  downblock: "ResnetDownsampleBlock2D"
+  upblock: "ResnetUpsampleBlock2D"
+  add_attention: True
+  attention_head_dim: 64
+  save_images: 8
+  ssim_loss: True
+  ssim_loss_weight: 0.1
+  head: "sig_dim"
+  checkpoint: "checkpoints/mdn-mixhq-8shot/mdn-mixhq-8shot.ckpt"
+
+optimizer:
+  name: "adam"
+  lr: 1e-5
+  weight_decay: 0
+  betas: 
+    - 0.9
+    - 0.99
+  scheduler:
+    name: "cosine"
+    frequency: 1
+
+loss:
+  name: "mse"
+
+logger:
+  checkpoint_dir: "/ssd2/datasets/users/rkuczbanski/logs/v2"
+  save_top_k: 1
+
+device: "gpu"
+iter: 2000
+eval_freq: 100
+seed: 42

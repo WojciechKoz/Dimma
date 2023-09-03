@@ -1,0 +1,56 @@
+name: "mdn-mixhq-all"
+
+dataset:
+  name: "MixHQ"
+  path: "data/MixHQ"
+  num_workers: 8
+  pin_memory: False
+  transform: 
+    name: "mdn"
+    image_size: 256
+    path: "dimmers/480shot/"
+    dim_factor: 
+      - 0.3
+      - 2.0
+    mdn: True
+  batch_size: 4
+
+model:
+  channels: 
+    - 64 
+    - 128
+    - 256
+    - 384
+  layers_per_block: 2
+  downblock: "ResnetDownsampleBlock2D"
+  upblock: "ResnetUpsampleBlock2D"
+  add_attention: True
+  attention_head_dim: 64
+  save_images: 8
+  ssim_loss: True
+  ssim_loss_weight: 0.1
+  head: "sig_dim"
+
+
+optimizer:
+  name: "adam"
+  lr: 1e-5
+  weight_decay: 0
+  betas: 
+    - 0.9
+    - 0.99
+  scheduler:
+    name: "cosine"
+    frequency: 1
+
+loss:
+  name: "mse"
+
+logger:
+  checkpoint_dir: "checkpoints"
+  save_top_k: 1
+
+device: "gpu"
+iter: 5_000
+eval_freq: 100
+seed: 42
