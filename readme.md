@@ -1,4 +1,8 @@
 # Dimma: Semi-supervised Low Light Image Enhancement with Adaptive Dimming
+### [arXiv](https://arxiv.org/abs/2310.09633)
+**Dimma: Semi-supervised Low Light Image Enhancement with Adaptive Dimming**
+
+Wojciech Kozłowski, Michał Szachniewicz, Michał Stypułkowski, Maciej Zięba
 
 ## Abstract
 ![Visual Abstract](images/dimma-abstract.png)
@@ -41,3 +45,14 @@ python finetune.py --config="configs/LOL/stage2/3shot-lol-ft.yaml"
 For different config file use --config flag. There are many configs in config folder.
 
 Please, bear in mind that you need to first train unsupervised model before running finetune.py. Data and models are not included in this repository. You can get them from the following link: [drive](https://drive.google.com/drive/folders/1mobXx1HI8BS-C8_-U-EHNvbMEPCoGIUK?usp=sharing).
+
+## Citation
+If you find our work useful for your research, please cite our paper
+```
+@article{kozlowski2023dimma,
+  title={Dimma: Semi-supervised Low Light Image Enhancement with Adaptive Dimming},
+  author={Koz{\l}owski, Wojciech and Szachniewicz, Micha{\l} and Stypu{\l}kowski, Micha{\l} and Zi{\k{e}}ba, Maciej},
+  journal={arXiv preprint arXiv:2310.09633},
+  year={2023}
+}
+```
