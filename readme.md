@@ -39,7 +39,7 @@ pip install -r requirements.txt
 and run the following commands:
 
 ```bash
-python train_supervised.py --config="configs/LOL/stage1/3shot-lol.yaml"
+python train_unsupervised.py --config="configs/LOL/stage1/3shot-lol.yaml"
 python finetune.py --config="configs/LOL/stage2/3shot-lol-ft.yaml"
 ```
 For different config file use --config flag. There are many configs in config folder.
